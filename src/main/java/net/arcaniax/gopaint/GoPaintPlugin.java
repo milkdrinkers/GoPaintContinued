@@ -36,7 +36,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class GoPaintPlugin extends JavaPlugin implements Listener {
 
-    private static final int BSTATS_ID = 10557;
+    private static final int BSTATS_ID = 19520;
     public static boolean plotSquaredEnabled;
     public static NmsManager nmsManager;
     private static PlayerBrushManager manager;
