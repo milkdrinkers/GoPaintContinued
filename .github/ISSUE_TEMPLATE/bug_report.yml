@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report for goPaint! Fill out the following form to your best ability to help us fix the problem.
-        Only use this if you're absolutely sure that you found a bug and can reproduce it. For anything else, use: [our Discord server](https://discord.com/invite/jpRVrjd).
+        Only use this if you're absolutely sure that you found a bug and can reproduce it.
 
   - type: dropdown
     attributes:
@@ -88,7 +88,7 @@ body:
       label: Checklist
       description: Make sure you have followed each of the steps outlined here.
       options:
-        - label: I am using the newest build from https://ci.athion.net/job/goPaint-1.14+/ and the issue still persists.
+        - label: I am using the newest build from https://github.com/milkdrinkers/GoPaintContinued and the issue still persists.
           required: true
 
   - type: textarea
