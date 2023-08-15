@@ -51,16 +51,16 @@ public class SprayBrush extends Brush {
         for (Block b : blocks) {
             if ((!pb.isSurfaceModeEnabled()) || Surface.isOnSurface(b.getLocation(), p.getLocation())) {
                 if ((!pb.isMaskEnabled()) || (b.getType().equals(pb
-                        .getMask()
-                        .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == pb.getMask().getData()))) {
+                    .getMask()
+                    .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == pb.getMask().getData()))) {
                     Random r = new Random();
                     if (r.nextInt(100) < pb.getChance()) {
                         int random = r.nextInt(pbBlocks.size());
                         placedBlocks.add(
-                                new BlockPlace(
-                                        b.getLocation(),
-                                        new BlockType(pbBlocks.get(random).getMaterial(), pbBlocks.get(random).getData())
-                                ));
+                            new BlockPlace(
+                                b.getLocation(),
+                                new BlockType(pbBlocks.get(random).getMaterial(), pbBlocks.get(random).getData())
+                            ));
                     }
                 }
             }
@@ -88,19 +88,19 @@ public class SprayBrush extends Brush {
         for (Block b : blocks) {
             if ((!epb.isSurfaceModeEnabled()) || Surface.isOnSurface(b.getLocation(), p.getLocation())) {
                 if ((!epb.isMaskEnabled()) || (b.getType().equals(epb
-                        .getMask()
-                        .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == epb.getMask().getData()))) {
+                    .getMask()
+                    .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == epb.getMask().getData()))) {
                     Random r = new Random();
                     if (r.nextInt(100) < epb.getChance()) {
                         int random = r.nextInt(epbBlocks.size());
                         placedBlocks.add(
-                                new BlockPlace(
-                                        b.getLocation(),
-                                        new BlockType(
-                                                epb.getBlocks().get(random).getMaterial(),
-                                                epb.getBlocks().get(random).getData()
-                                        )
-                                ));
+                            new BlockPlace(
+                                b.getLocation(),
+                                new BlockType(
+                                    epb.getBlocks().get(random).getMaterial(),
+                                    epb.getBlocks().get(random).getData()
+                                )
+                            ));
                     }
                 }
             }

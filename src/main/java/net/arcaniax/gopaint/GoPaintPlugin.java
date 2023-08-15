@@ -92,8 +92,8 @@ public class GoPaintPlugin extends JavaPlugin implements Listener {
         Metrics metrics = new Metrics(this, BSTATS_ID);
 
         metrics.addCustomChart(new SimplePie(
-                "worldeditImplementation",
-                () -> Bukkit.getPluginManager().getPlugin("FastAsyncWorldEdit") != null ? "FastAsyncWorldEdit" : "WorldEdit"
+            "worldeditImplementation",
+            () -> Bukkit.getPluginManager().getPlugin("FastAsyncWorldEdit") != null ? "FastAsyncWorldEdit" : "WorldEdit"
         ));
     }
 

@@ -83,20 +83,20 @@ public class BezierSplineSegment {
         assert (t >= 0);
         assert (t <= 1);
         return 3 * (1 - t) * (1 - t) * (p1.getX() - p0.getX()) + 6 * (1 - t) * t
-                * (p2.getX() - p1.getX()) + 3 * t * t * (p3.getX() - p2.getX());
+            * (p2.getX() - p1.getX()) + 3 * t * t * (p3.getX() - p2.getX());
     }
 
     public double getdYdT(double t) {
         assert (t <= 1);
         return 3 * (1 - t) * (1 - t) * (p1.getY() - p0.getY()) + 6 * (1 - t) * t
-                * (p2.getY() - p1.getY()) + 3 * t * t * (p3.getY() - p2.getY());
+            * (p2.getY() - p1.getY()) + 3 * t * t * (p3.getY() - p2.getY());
     }
 
     public double getdZdT(double t) {
         assert (t >= 0);
         assert (t <= 1);
         return 3 * (1 - t) * (1 - t) * (p1.getZ() - p0.getZ()) + 6 * (1 - t) * t
-                * (p2.getZ() - p1.getZ()) + 3 * t * t * (p3.getZ() - p2.getZ());
+            * (p2.getZ() - p1.getZ()) + 3 * t * t * (p3.getZ() - p2.getZ());
     }
 
     public double getdTdS(double t) {
@@ -150,22 +150,22 @@ public class BezierSplineSegment {
         Location result = new Location(p0.getWorld(), 0, 0, 0);
         if (xFlat == null) {
             result.setX((Math.pow(1 - f, 3) * p0.getX())
-                    + (3 * Math.pow(1 - f, 2) * f * p1.getX())
-                    + (3 * (1 - f) * f * f * p2.getX()) + (Math.pow(f, 3) * p3.getX()));
+                + (3 * Math.pow(1 - f, 2) * f * p1.getX())
+                + (3 * (1 - f) * f * f * p2.getX()) + (Math.pow(f, 3) * p3.getX()));
         } else {
             result.setX(xFlat);
         }
         if (yFlat == null) {
             result.setY((Math.pow(1 - f, 3) * p0.getY())
-                    + (3 * Math.pow(1 - f, 2) * f * p1.getY())
-                    + (3 * (1 - f) * f * f * p2.getY()) + (Math.pow(f, 3) * p3.getY()));
+                + (3 * Math.pow(1 - f, 2) * f * p1.getY())
+                + (3 * (1 - f) * f * f * p2.getY()) + (Math.pow(f, 3) * p3.getY()));
         } else {
             result.setY(yFlat);
         }
         if (zFlat == null) {
             result.setZ((Math.pow(1 - f, 3) * p0.getZ())
-                    + (3 * Math.pow(1 - f, 2) * f * p1.getZ())
-                    + (3 * (1 - f) * f * f * p2.getZ()) + (Math.pow(f, 3) * p3.getZ()));
+                + (3 * Math.pow(1 - f, 2) * f * p1.getZ())
+                + (3 * (1 - f) * f * f * p2.getZ()) + (Math.pow(f, 3) * p3.getZ()));
         } else {
             result.setZ(zFlat);
         }

@@ -19,15 +19,7 @@
 package net.arcaniax.gopaint.listeners;
 
 import net.arcaniax.gopaint.GoPaintPlugin;
-import net.arcaniax.gopaint.objects.brush.AngleBrush;
-import net.arcaniax.gopaint.objects.brush.Brush;
-import net.arcaniax.gopaint.objects.brush.DiscBrush;
-import net.arcaniax.gopaint.objects.brush.FractureBrush;
-import net.arcaniax.gopaint.objects.brush.GradientBrush;
-import net.arcaniax.gopaint.objects.brush.OverlayBrush;
-import net.arcaniax.gopaint.objects.brush.PaintBrush;
-import net.arcaniax.gopaint.objects.brush.SplatterBrush;
-import net.arcaniax.gopaint.objects.brush.SprayBrush;
+import net.arcaniax.gopaint.objects.brush.*;
 import net.arcaniax.gopaint.objects.other.BlockType;
 import net.arcaniax.gopaint.objects.player.PlayerBrush;
 import net.arcaniax.gopaint.utils.DisabledBlocks;
@@ -113,7 +105,7 @@ public class InventoryListener implements Listener {
                         pb.decreaseAngleDistance();
                     }
                 } else if (b instanceof GradientBrush || b instanceof PaintBrush
-                        || b instanceof SplatterBrush) {
+                    || b instanceof SplatterBrush) {
                     if (e.getClick().equals(ClickType.LEFT)) {
                         pb.increaseFalloffStrength();
                     } else if (e.getClick().equals(ClickType.RIGHT)) {
@@ -169,10 +161,10 @@ public class InventoryListener implements Listener {
                 }
                 if (e.getClick().equals(ClickType.LEFT)) {
                     if (e.getCursor() != null && e.getCursor().getType().isBlock() && e
-                            .getCursor()
-                            .getType()
-                            .isSolid() && (!DisabledBlocks
-                            .isDisabled(e.getCursor().getType()))) {
+                        .getCursor()
+                        .getType()
+                        .isSolid() && (!DisabledBlocks
+                        .isDisabled(e.getCursor().getType()))) {
                         pb.addBlock(new BlockType(e.getCursor().getType(), e.getCursor().getDurability()), slot);
                     }
                 } else if (e.getClick().equals(ClickType.RIGHT)) {
@@ -182,9 +174,9 @@ public class InventoryListener implements Listener {
             } else if (e.getRawSlot() == 43 || e.getRawSlot() == 52) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     if (e.getCursor() != null && e.getCursor().getType().isBlock() && e
-                            .getCursor()
-                            .getType()
-                            .isSolid() && (!DisabledBlocks.isDisabled(e.getCursor().getType()))) {
+                        .getCursor()
+                        .getType()
+                        .isSolid() && (!DisabledBlocks.isDisabled(e.getCursor().getType()))) {
                         pb.setMask(new BlockType(e.getCursor().getType(), e.getCursor().getDurability()));
                     }
                 }
@@ -223,8 +215,8 @@ public class InventoryListener implements Listener {
             }
             if (check) {
                 pb.setBrush(GoPaintPlugin
-                        .getBrushManager()
-                        .getBrush(e.getCurrentItem().getItemMeta().getDisplayName().replaceAll("§6", "")));
+                    .getBrushManager()
+                    .getBrush(e.getCurrentItem().getItemMeta().getDisplayName().replaceAll("§6", "")));
                 pb.updateInventory();
                 p.openInventory(pb.getInventory());
                 e.setCancelled(true);

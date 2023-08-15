@@ -940,7 +940,7 @@ public enum XMaterial {
             return comp.getType() == this.parseMaterial();
         }
         if (comp.getType() == this.parseMaterial() &&
-                (int) comp.getData().getData() == this.data) {
+            (int) comp.getData().getData() == this.data) {
             return true;
         }
         XMaterial xmat = fromMaterial(comp.getType());

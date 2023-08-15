@@ -23,7 +23,6 @@ import net.arcaniax.gopaint.objects.player.ExportedPlayerBrush;
 import net.arcaniax.gopaint.objects.player.PlayerBrush;
 import net.arcaniax.gopaint.utils.XMaterial;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,8 +30,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
-
-import java.util.Set;
 
 public class InteractListener implements Listener {
 
@@ -55,16 +52,16 @@ public class InteractListener implements Listener {
         }
         if ((e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
             if (e.getPlayer().getItemInHand().hasItemMeta() && e.getPlayer().getItemInHand().getItemMeta().hasDisplayName() && e
+                .getPlayer()
+                .getItemInHand()
+                .getItemMeta()
+                .getDisplayName()
+                .startsWith(" §b♦ ") && e.getPlayer().getItemInHand().getItemMeta().hasLore()) {
+                final ExportedPlayerBrush epb = new ExportedPlayerBrush(e
                     .getPlayer()
                     .getItemInHand()
                     .getItemMeta()
-                    .getDisplayName()
-                    .startsWith(" §b♦ ") && e.getPlayer().getItemInHand().getItemMeta().hasLore()) {
-                final ExportedPlayerBrush epb = new ExportedPlayerBrush(e
-                        .getPlayer()
-                        .getItemInHand()
-                        .getItemMeta()
-                        .getDisplayName(), e.getPlayer().getItemInHand().getItemMeta().getLore());
+                    .getDisplayName(), e.getPlayer().getItemInHand().getItemMeta().getLore());
                 final Player p = e.getPlayer();
                 final Location loc;
                 if (e.getAction().equals(Action.RIGHT_CLICK_AIR)) {
@@ -76,8 +73,8 @@ public class InteractListener implements Listener {
             }
         }
         if (e.getPlayer().getItemInHand().getType() == XMaterial.FEATHER.parseMaterial() && (e
-                .getAction()
-                .equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
+            .getAction()
+            .equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
             e.setCancelled(true);
             final Player p = e.getPlayer();
             final Location loc;
@@ -87,9 +84,9 @@ public class InteractListener implements Listener {
                 loc = e.getClickedBlock().getLocation().clone();
             }
             if ((!e.getPlayer().hasPermission("gopaint.world.bypass")) && (GoPaintPlugin
-                    .getSettings()
-                    .getDisabledWorlds()
-                    .contains(loc.getWorld().getName()))) {
+                .getSettings()
+                .getDisabledWorlds()
+                .contains(loc.getWorld().getName()))) {
                 return;
             }
             if (loc.getBlock().getType().equals(XMaterial.AIR.parseMaterial())) {
@@ -100,13 +97,13 @@ public class InteractListener implements Listener {
                 pb.getBrush().paint(loc, p);
             } else {
                 p.sendMessage(GoPaintPlugin
-                        .getSettings()
-                        .getPrefix() + "§cYour brush is disabled, left click to enable the brush.");
+                    .getSettings()
+                    .getPrefix() + "§cYour brush is disabled, left click to enable the brush.");
             }
         }
         if (e.getPlayer().getItemInHand().getType() == XMaterial.FEATHER.parseMaterial() && (e
-                .getAction()
-                .equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
+            .getAction()
+            .equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
             e.setCancelled(true);
             Player p = e.getPlayer();
             PlayerBrush pb = GoPaintPlugin.getBrushManager().getPlayerBrush(p);

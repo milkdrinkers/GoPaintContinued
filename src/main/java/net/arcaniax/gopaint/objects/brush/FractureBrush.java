@@ -52,22 +52,22 @@ public class FractureBrush extends Brush {
         for (Block b : blocks) {
             if ((!pb.isSurfaceModeEnabled()) || Surface.isOnSurface(b.getLocation(), p.getLocation())) {
                 if ((!pb.isMaskEnabled()) || (b.getType().equals(pb
-                        .getMask()
-                        .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == pb.getMask().getData()))) {
+                    .getMask()
+                    .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == pb.getMask().getData()))) {
                     if (Height.getAverageHeightDiffFracture(b.getLocation(), Height.getHeight(p, b.getLocation()), 1, p) >= 0.1) {
                         if (Height.getAverageHeightDiffFracture(
-                                b.getLocation(),
-                                Height.getHeight(p, b.getLocation()),
-                                pb.getFractureDistance(),
-                                p
+                            b.getLocation(),
+                            Height.getHeight(p, b.getLocation()),
+                            pb.getFractureDistance(),
+                            p
                         ) >= 0.1) {
                             Random r = new Random();
                             int random = r.nextInt(pbBlocks.size());
                             placedBlocks.add(
-                                    new BlockPlace(
-                                            b.getLocation(),
-                                            new BlockType(pbBlocks.get(random).getMaterial(), pbBlocks.get(random).getData())
-                                    ));
+                                new BlockPlace(
+                                    b.getLocation(),
+                                    new BlockType(pbBlocks.get(random).getMaterial(), pbBlocks.get(random).getData())
+                                ));
                         }
                     }
                 }
@@ -95,25 +95,25 @@ public class FractureBrush extends Brush {
         for (Block b : blocks) {
             if ((!epb.isSurfaceModeEnabled()) || Surface.isOnSurface(b.getLocation(), p.getLocation())) {
                 if ((!epb.isMaskEnabled()) || (b.getType().equals(epb
-                        .getMask()
-                        .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == epb.getMask().getData()))) {
+                    .getMask()
+                    .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == epb.getMask().getData()))) {
                     if (Height.getAverageHeightDiffFracture(b.getLocation(), Height.getHeight(p, b.getLocation()), 1, p) >= 0.1) {
                         if (Height.getAverageHeightDiffFracture(
-                                b.getLocation(),
-                                Height.getHeight(p, b.getLocation()),
-                                epb.getFractureDistance(),
-                                p
+                            b.getLocation(),
+                            Height.getHeight(p, b.getLocation()),
+                            epb.getFractureDistance(),
+                            p
                         ) >= 0.1) {
                             Random r = new Random();
                             int random = r.nextInt(epbBlocks.size());
                             placedBlocks.add(
-                                    new BlockPlace(
-                                            b.getLocation(),
-                                            new BlockType(
-                                                    epb.getBlocks().get(random).getMaterial(),
-                                                    epb.getBlocks().get(random).getData()
-                                            )
-                                    ));
+                                new BlockPlace(
+                                    b.getLocation(),
+                                    new BlockType(
+                                        epb.getBlocks().get(random).getMaterial(),
+                                        epb.getBlocks().get(random).getData()
+                                    )
+                                ));
                         }
                     }
 

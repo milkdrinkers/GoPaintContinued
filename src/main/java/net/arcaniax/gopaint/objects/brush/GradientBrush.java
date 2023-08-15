@@ -54,8 +54,8 @@ public class GradientBrush extends Brush {
         for (Block b : blocks) {
             if ((!pb.isSurfaceModeEnabled()) || Surface.isOnSurface(b.getLocation(), p.getLocation())) {
                 if ((!pb.isMaskEnabled()) || (b.getType().equals(pb
-                        .getMask()
-                        .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == pb.getMask().getData()))) {
+                    .getMask()
+                    .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == pb.getMask().getData()))) {
                     double _y = (b.getLocation().getBlockY() - y) / (double) size * pbBlocks.size();
                     Random r = new Random();
                     int block = (int) (_y + (r.nextDouble() * 2 - 1) * ((double) mixing / 100.0));
@@ -66,15 +66,15 @@ public class GradientBrush extends Brush {
                         block = pbBlocks.size() - 1;
                     }
                     double rate = (b
-                            .getLocation()
-                            .distance(loc) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0)) / (((double) size / 2.0) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0));
+                        .getLocation()
+                        .distance(loc) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0)) / (((double) size / 2.0) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0));
 
                     if (!(r.nextDouble() <= rate)) {
                         placedBlocks.add(
-                                new BlockPlace(
-                                        b.getLocation(),
-                                        new BlockType(pbBlocks.get(block).getMaterial(), pbBlocks.get(block).getData())
-                                ));
+                            new BlockPlace(
+                                b.getLocation(),
+                                new BlockType(pbBlocks.get(block).getMaterial(), pbBlocks.get(block).getData())
+                            ));
                     }
                 }
             }
@@ -105,8 +105,8 @@ public class GradientBrush extends Brush {
         for (Block b : blocks) {
             if ((!epb.isSurfaceModeEnabled()) || Surface.isOnSurface(b.getLocation(), p.getLocation())) {
                 if ((!epb.isMaskEnabled()) || (b.getType().equals(epb
-                        .getMask()
-                        .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == epb.getMask().getData()))) {
+                    .getMask()
+                    .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == epb.getMask().getData()))) {
                     double _y = (b.getLocation().getBlockY() - y) / (double) size * epbBlocks.size();
                     Random r = new Random();
                     int block = (int) (_y + (r.nextDouble() * 2 - 1) * ((double) mixing / 100.0));
@@ -117,15 +117,15 @@ public class GradientBrush extends Brush {
                         block = epbBlocks.size() - 1;
                     }
                     double rate = (b
-                            .getLocation()
-                            .distance(loc) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0)) / (((double) size / 2.0) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0));
+                        .getLocation()
+                        .distance(loc) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0)) / (((double) size / 2.0) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0));
 
                     if (!(r.nextDouble() <= rate)) {
                         placedBlocks.add(
-                                new BlockPlace(
-                                        b.getLocation(),
-                                        new BlockType(epbBlocks.get(block).getMaterial(), epbBlocks.get(block).getData())
-                                ));
+                            new BlockPlace(
+                                b.getLocation(),
+                                new BlockType(epbBlocks.get(block).getMaterial(), epbBlocks.get(block).getData())
+                            ));
                     }
                 }
             }

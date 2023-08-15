@@ -54,8 +54,8 @@ public class BlockPlacer {
                         if (isGmask(p, v.toBlockPoint())) {
                             try {
                                 editsession.setBlock(
-                                        Vector3.at(l.getBlockX(), l.getBlockY(), l.getBlockZ()).toBlockPoint(),
-                                        BukkitAdapter.asBlockType(bp.bt.getMaterial()).getDefaultState()
+                                    Vector3.at(l.getBlockX(), l.getBlockY(), l.getBlockZ()).toBlockPoint(),
+                                    BukkitAdapter.asBlockType(bp.bt.getMaterial()).getDefaultState()
                                 );
                             } catch (Exception ignored) {
                             }

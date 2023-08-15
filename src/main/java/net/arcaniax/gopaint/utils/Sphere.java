@@ -30,7 +30,7 @@ public class Sphere {
         List<Block> blocks = new ArrayList<>();
         for (Block b : getBlocksInRadiusWithAir(middlePoint, d)) {
             if (BlockUtils.isLoaded(b.getLocation()) && (!b.getType()
-                    .equals(XMaterial.AIR.parseMaterial()))) {
+                .equals(XMaterial.AIR.parseMaterial()))) {
                 blocks.add(b);
             }
         }

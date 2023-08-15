@@ -62,25 +62,25 @@ public class Height {
         double maxHeightDiff = 0;
         double maxHeightDiff2 = 0;
         double diff = Math
-                .abs(getHeight(p, l.clone().add(dis, 0, -dis)) - getHeight(p, l.clone().add(-dis, 0, dis)));
+            .abs(getHeight(p, l.clone().add(dis, 0, -dis)) - getHeight(p, l.clone().add(-dis, 0, dis)));
         if (diff >= maxHeightDiff) {
             maxHeightDiff = diff;
             maxHeightDiff2 = maxHeightDiff;
         }
         diff = Math
-                .abs(getHeight(p, l.clone().add(dis, 0, dis)) - getHeight(p, l.clone().add(-dis, 0, -dis)));
+            .abs(getHeight(p, l.clone().add(dis, 0, dis)) - getHeight(p, l.clone().add(-dis, 0, -dis)));
         if (diff > maxHeightDiff) {
             maxHeightDiff = diff;
             maxHeightDiff2 = maxHeightDiff;
         }
         diff = Math
-                .abs(getHeight(p, l.clone().add(dis, 0, 0)) - getHeight(p, l.clone().add(-dis, 0, 0)));
+            .abs(getHeight(p, l.clone().add(dis, 0, 0)) - getHeight(p, l.clone().add(-dis, 0, 0)));
         if (diff > maxHeightDiff) {
             maxHeightDiff = diff;
             maxHeightDiff2 = maxHeightDiff;
         }
         diff = Math
-                .abs(getHeight(p, l.clone().add(0, 0, -dis)) - getHeight(p, l.clone().add(0, 0, dis)));
+            .abs(getHeight(p, l.clone().add(0, 0, -dis)) - getHeight(p, l.clone().add(0, 0, dis)));
         if (diff > maxHeightDiff) {
             maxHeightDiff = diff;
             maxHeightDiff2 = maxHeightDiff;

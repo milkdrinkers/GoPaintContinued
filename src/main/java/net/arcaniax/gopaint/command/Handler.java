@@ -71,26 +71,26 @@ public class Handler implements Listener, CommandExecutor {
                     }
                     return true;
                 } else if ((args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("r")) && p.hasPermission(
-                        "gopaint.admin")) {
+                    "gopaint.admin")) {
                     GoPaintPlugin.reload();
                     p.sendMessage(prefix + "§aReloaded");
                     return true;
                 } else if (args[0].equalsIgnoreCase("info") || args[0].equalsIgnoreCase("i")) {
 
                     p.spigot().sendMessage(new ComponentBuilder("goPaint> ").color(ChatColor.AQUA)
-                            .append("Created by: ").color(ChatColor.GOLD)
-                            .append("Arcaniax").color(ChatColor.YELLOW).create());
+                        .append("Created by: ").color(ChatColor.GOLD)
+                        .append("Arcaniax").color(ChatColor.YELLOW).create());
 
 
                     p.spigot().sendMessage(new ComponentBuilder("goPaint> ").color(ChatColor.AQUA)
-                            .append("Links: ").color(ChatColor.GOLD)
-                            .append("Twitter").color(ChatColor.DARK_AQUA).color(ChatColor.UNDERLINE)
-                            .event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://twitter.com/Arcaniax")).append("     ")
-                            .append("Spigot").color(ChatColor.YELLOW).color(ChatColor.UNDERLINE)
-                            .event(new ClickEvent(
-                                    ClickEvent.Action.OPEN_URL,
-                                    "https://www.spigotmc.org/resources/authors/arcaniax.47444/"
-                            )).create());
+                        .append("Links: ").color(ChatColor.GOLD)
+                        .append("Twitter").color(ChatColor.DARK_AQUA).color(ChatColor.UNDERLINE)
+                        .event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://twitter.com/Arcaniax")).append("     ")
+                        .append("Spigot").color(ChatColor.YELLOW).color(ChatColor.UNDERLINE)
+                        .event(new ClickEvent(
+                            ClickEvent.Action.OPEN_URL,
+                            "https://www.spigotmc.org/resources/authors/arcaniax.47444/"
+                        )).create());
                     return true;
                 }
                 if (p.hasPermission("gopaint.admin")) {

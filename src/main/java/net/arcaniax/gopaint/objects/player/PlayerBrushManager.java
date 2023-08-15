@@ -18,17 +18,7 @@
  */
 package net.arcaniax.gopaint.objects.player;
 
-import net.arcaniax.gopaint.objects.brush.AngleBrush;
-import net.arcaniax.gopaint.objects.brush.Brush;
-import net.arcaniax.gopaint.objects.brush.BucketBrush;
-import net.arcaniax.gopaint.objects.brush.DiscBrush;
-import net.arcaniax.gopaint.objects.brush.FractureBrush;
-import net.arcaniax.gopaint.objects.brush.GradientBrush;
-import net.arcaniax.gopaint.objects.brush.OverlayBrush;
-import net.arcaniax.gopaint.objects.brush.PaintBrush;
-import net.arcaniax.gopaint.objects.brush.SphereBrush;
-import net.arcaniax.gopaint.objects.brush.SplatterBrush;
-import net.arcaniax.gopaint.objects.brush.SprayBrush;
+import net.arcaniax.gopaint.objects.brush.*;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;

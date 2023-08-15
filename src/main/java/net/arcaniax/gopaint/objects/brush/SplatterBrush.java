@@ -52,21 +52,21 @@ public class SplatterBrush extends Brush {
         for (Block b : blocks) {
             if ((!pb.isSurfaceModeEnabled()) || Surface.isOnSurface(b.getLocation(), p.getLocation())) {
                 if ((!pb.isMaskEnabled()) || (b.getType().equals(pb
-                        .getMask()
-                        .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == pb.getMask().getData()))) {
+                    .getMask()
+                    .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == pb.getMask().getData()))) {
                     Random r = new Random();
                     double rate = (b
-                            .getLocation()
-                            .distance(loc) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0)) / (((double) size / 2.0) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0));
+                        .getLocation()
+                        .distance(loc) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0)) / (((double) size / 2.0) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0));
                     if (!(r.nextDouble() <= rate)) {
                         int random = r.nextInt(pbBlocks.size());
                         placedBlocks.add(
-                                new BlockPlace(b.getLocation(),
-                                        new BlockType(
-                                                pb.getBlocks().get(random).getMaterial(),
-                                                pb.getBlocks().get(random).getData()
-                                        )
-                                ));
+                            new BlockPlace(b.getLocation(),
+                                new BlockType(
+                                    pb.getBlocks().get(random).getMaterial(),
+                                    pb.getBlocks().get(random).getData()
+                                )
+                            ));
                     }
                 }
             }
@@ -94,21 +94,21 @@ public class SplatterBrush extends Brush {
         for (Block b : blocks) {
             if ((!epb.isSurfaceModeEnabled()) || Surface.isOnSurface(b.getLocation(), p.getLocation())) {
                 if ((!epb.isMaskEnabled()) || (b.getType().equals(epb
-                        .getMask()
-                        .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == epb.getMask().getData()))) {
+                    .getMask()
+                    .getMaterial()) && (XMaterial.isNewVersion() || b.getData() == epb.getMask().getData()))) {
                     Random r = new Random();
                     double rate = (b
-                            .getLocation()
-                            .distance(loc) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0)) / (((double) size / 2.0) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0));
+                        .getLocation()
+                        .distance(loc) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0)) / (((double) size / 2.0) - ((double) size / 2.0) * ((100.0 - (double) falloff) / 100.0));
                     if (!(r.nextDouble() <= rate)) {
                         int random = r.nextInt(epbBlocks.size());
                         placedBlocks.add(
-                                new BlockPlace(b.getLocation(),
-                                        new BlockType(
-                                                epb.getBlocks().get(random).getMaterial(),
-                                                epb.getBlocks().get(random).getData()
-                                        )
-                                ));
+                            new BlockPlace(b.getLocation(),
+                                new BlockType(
+                                    epb.getBlocks().get(random).getMaterial(),
+                                    epb.getBlocks().get(random).getData()
+                                )
+                            ));
                     }
                 }
             }
