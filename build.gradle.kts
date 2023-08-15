@@ -1,87 +1,109 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.ajoberstar.grgit.Grgit
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
-import com.diffplug.gradle.spotless.SpotlessPlugin
 
 plugins {
-    java
     `java-library`
 
+    id("com.github.johnrengelman.shadow") version "8.1.1" // Shades and relocates dependencies, See https://imperceptiblethoughts.com/shadow/introduction/
     id("com.diffplug.spotless") version "6.20.0"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.ajoberstar.grgit") version "5.2.0"
-    id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
+    id("xyz.jpenilla.run-paper") version "2.1.0" // Adds runServer and runMojangMappedServer tasks for testing
+    id("net.minecrell.plugin-yml.bukkit") version "0.6.0" // Automatic plugin.yml generation
 
     idea
     eclipse
 }
 
-the<JavaPluginExtension>().toolchain {
-    languageVersion.set(JavaLanguageVersion.of(17))
-}
+group = "net.arcaniax.gopaint"
+version = "1.0.0"
+description = "GoPaint is a plugin that's designed to simplify painting inside of Minecraft"
 
-tasks.compileJava.configure {
-    options.release.set(8)
-}
-
-configurations.all {
-    attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 17)
-}
-
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17)) // Configure the java toolchain. This allows gradle to auto-provision JDK 17 on systems that only have JDK 8 installed for example.
 }
 
 repositories {
     mavenCentral()
-    maven {
-        name = "Paper"
-        url = uri("https://papermc.io/repo/repository/maven-public/")
-    }
-    maven {
-        name = "Mojang"
-        url = uri("https://libraries.minecraft.net/")
-    }
-    maven {
-        name = "S01 Sonatype"
-        url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-    }
+    maven("https://oss.sonatype.org/content/repositories/snapshots")
+    maven("https://libraries.minecraft.net/")
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
-    implementation(platform("com.intellectualsites.bom:bom-newest:1.34"))
-    compileOnlyApi("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
+    compileOnly("org.jetbrains:annotations:24.0.1")
+    annotationProcessor("org.jetbrains:annotations:24.0.1")
+
+    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+    implementation("io.papermc:paperlib:")
     compileOnly("com.mojang:authlib:1.5.25")
-    compileOnlyApi("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit")
-    implementation("dev.notmyfault.serverlib:ServerLib")
+
+    implementation(platform("com.intellectualsites.bom:bom-newest:1.34"))
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core")
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit") { isTransitive = false }
+
     implementation("org.bstats:bstats-bukkit:3.0.2")
     implementation("org.bstats:bstats-base:3.0.2")
-    implementation("io.papermc:paperlib")
 }
 
-var buildNumber by extra("")
-ext {
-    val git: Grgit = Grgit.open {
-        dir = File("$rootDir/.git")
+tasks {
+    build {
+        dependsOn(shadowJar)
     }
-    val commit: String? = git.head().abbreviatedId
-    buildNumber = if (project.hasProperty("buildnumber")) {
-        project.properties["buildnumber"] as String
-    } else {
-        commit.toString()
+
+    compileJava {
+        options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
+
+        // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
+        // See https://openjdk.java.net/jeps/247 for more information.
+        options.release.set(8)
+        options.compilerArgs.addAll(arrayListOf("-Xlint:all", "-Xlint:-processing", "-Xdiags:verbose"))
+    }
+
+    processResources {
+        filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
+    }
+
+    shadowJar {
+        archiveBaseName.set(project.name)
+        archiveClassifier.set("")
+
+        // Shadow classes
+        // helper function to relocate a package into our package
+        fun reloc(originPkg: String, targetPkg: String) = relocate(originPkg, "${project.group}.deps.${targetPkg}")
+
+        reloc("net.lingala.zip4j", "zip4j")
+        reloc("org.bstats", "metrics")
+        reloc("io.papermc.lib", "paperlib")
+    }
+
+    runServer {
+        // Configure the Minecraft version for our task.
+        minecraftVersion("1.20.1")
+
+        // IntelliJ IDEA debugger setup: https://docs.papermc.io/paper/dev/debugging#using-a-remote-debugger
+        jvmArgs("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005")
+        systemProperty("terminal.jline", false)
+        systemProperty("terminal.ansi", true)
     }
 }
 
-version = String.format("%s-%s", rootProject.version, buildNumber)
+bukkit {// Options: https://github.com/Minecrell/plugin-yml#bukkit
+    // Plugin main class (required)
+    main = "${project.group}.GoPaintPlugin"
 
-bukkit {
-    name = "goPaint"
-    main = "net.arcaniax.gopaint.GoPaintPlugin"
+    // Plugin Information
+    name = "GoPaint"
+    prefix = "GP"
+    version = "${project.version}"
+    description = "${project.description}"
+    website = "https://github.com/milkdrinkers/GoPaintContinued"
     authors = listOf("Arcaniax")
+    contributors = listOf("darksaid98")
     apiVersion = "1.13"
-    version = project.version.toString()
-    depend = listOf("WorldEdit")
-    website = "https://www.spigotmc.org/resources/27717/"
+
+    // Misc properties
+    load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD // STARTUP or POSTWORLD
+    depend = listOf("FastAsyncWorldEdit")
+    softDepend = listOf()
 
     commands {
         register("gopaint") {
@@ -103,21 +125,8 @@ bukkit {
     }
 }
 
-tasks.named<ShadowJar>("shadowJar") {
-    archiveClassifier.set(null as String?)
-    dependencies {
-        relocate("org.incendo.serverlib", "net.arcaniax.gopaint.serverlib") {
-            include(dependency("dev.notmyfault.serverlib:ServerLib:2.3.1"))
-        }
-        relocate("org.bstats", "net.arcaniax.gopaint.metrics") {
-            include(dependency("org.bstats:bstats-base"))
-            include(dependency("org.bstats:bstats-bukkit"))
-        }
-        relocate("io.papermc.lib", "net.arcaniax.gopaint.paperlib") {
-            include(dependency("io.papermc:paperlib:1.0.8"))
-        }
-    }
-    minimize()
+configurations.all {
+    attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 17)
 }
 
 spotless {
@@ -126,14 +135,4 @@ spotless {
         targetExclude("**/XMaterial.java")
         target("**/*.java")
     }
-}
-
-tasks.named<Copy>("processResources") {
-    filesMatching("plugin.yml") {
-        expand("version" to project.version)
-    }
-}
-
-tasks.named("build").configure {
-    dependsOn("shadowJar")
 }

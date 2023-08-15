@@ -1,1 +1,7 @@
-rootProject.name = "goPaint"
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "GoPaintContinued"
