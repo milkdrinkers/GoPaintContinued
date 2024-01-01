@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "net.arcaniax.gopaint"
-version = "1.0.0"
+version = "1.0.1"
 description = "GoPaint is a plugin that's designed to simplify painting inside of Minecraft"
 
 java {
@@ -32,7 +32,7 @@ dependencies {
     compileOnly("org.jetbrains:annotations:24.0.1")
     annotationProcessor("org.jetbrains:annotations:24.0.1")
 
-    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     implementation("io.papermc:paperlib:")
     compileOnly("com.mojang:authlib:1.5.25")
 
@@ -77,7 +77,7 @@ tasks {
 
     runServer {
         // Configure the Minecraft version for our task.
-        minecraftVersion("1.20.1")
+        minecraftVersion("1.20.4")
 
         // IntelliJ IDEA debugger setup: https://docs.papermc.io/paper/dev/debugging#using-a-remote-debugger
         jvmArgs("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005")
